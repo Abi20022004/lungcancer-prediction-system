@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f5f5f5;  /* Light background for a clean look */
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            padding: 20px;  /* Padding for the dashboard content */
+            background-color: white;  /* White background for content */
+            border-radius: 10px;  /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+            max-width: 800px;  /* Restrict maximum width */
+            margin: 20px auto;  /* Center the container */
+            text-align: left;  /* Left-align the content */
+        }
+
+        .table-wrapper {
+            overflow-x: auto;  /* Horizontal scrolling for large tables */
+            margin-bottom: 20px;  /* Space between table and other content */
+        }
+
+        /* Styles for the print view */
+        @media print {
+            body * {
+                visibility: hidden;  /* Hide all elements */
+            }
+            .dashboard-container, .dashboard-container * {
+                visibility: visible;  /* Only show dashboard content */
+            }
+            .dashboard-container {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;  /* Full width for print view */
+            }
+        }
+
+        /* Table styling */
+        table {
+            border-collapse: collapse;  /* Collapse table borders */
+            width: 100%;  /* Full width */
+        }
+
+        th, td {
+            padding: 12px;  /* Padding for table cells */
+            text-align: left;  /* Align text to the left */
+            border-bottom: 1px solid #ddd;  /* Border between rows */
+        }
+
+        th {
+            background-color: #2196f3;  /* Materialize blue for table headers */
+            color: white;  /* White text on headers */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar with Logout Button -->
+    <nav>
+        <div class="nav-wrapper" style="background-color: #2196f3;">  <!-- Materialize blue -->
+            <a href="/" class="brand-logo">Admin Dashboard</a>  <!-- Home link -->
+            <ul class="right">  <!-- Align elements to the right -->
+                <li>
+                    <!-- Logout button -->
+                   <!-- Logout button -->
+    <form action="/admin/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">  <!-- Container with padding and shadow -->
+        <h3>Patient Results</h3>  <!-- Title for the table -->
+
+        <div class="table-wrapper">  <!-- Table with horizontal scrolling -->
+            <table class="striped">  <!-- Materialize's striped table for readability -->
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patient_results %}
+                    <tr>
+                        <td>{{ patient[0] }}</td>
+                        <td>{{ patient[1] }}</td>
+                        <td>{{ patient[2] }}</td>  <!-- Display raw result (0 or 1) -->
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Print button -->
+        <button class="btn waves-effect waves-light" onclick="window.print()">Print</button>  <!-- Print functionality -->
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  <!-- Ensure Materialize works -->
+</body>
+</html>

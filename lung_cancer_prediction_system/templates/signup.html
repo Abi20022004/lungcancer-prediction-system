@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: white; /* White background */
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .container {
+            margin-top: 50px; /* Adjust top margin for centering */
+            text-align: center; /* Center align content */
+        }
+        .form-box {
+            border: 2px solid #4682B4; /* Steel Blue border */
+            border-radius: 10px; /* Rounded corners */
+            padding: 30px; /* Add padding */
+            display: inline-block; /* Make the box inline */
+            background-color: #f9f9f9; /* Light gray background color */
+            max-width: 330px; /* Limit the width */
+        }
+        .form-signup {
+            padding: 15px;
+            margin: 0 auto; /* Center the form */
+        }
+        .form-signup .form-signup-heading,
+        .form-signup .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-signup .checkbox {
+            font-weight: normal;
+        }
+        .form-signup .form-control {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-signup .form-control:focus {
+            z-index: 2;
+        }
+        .form-signup input[type="text"],
+        .form-signup input[type="password"] {
+            margin-bottom: 15px; /* Add space between fields */
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .form-signup button {
+            margin-top: 10px;
+            background-color: #4682B4; /* Steel Blue */
+            border-color: #4682B4; /* Steel Blue */
+            color: white; /* Text color */
+            font-size: 20px; /* Increase button size */
+            padding: 15px 30px; /* Increase padding */
+        }
+        .form-signup button:hover {
+            background-color: #87CEFA; /* Lighter Steel Blue when hovered over */
+            border-color: #87CEFA; /* Lighter Steel Blue when hovered over */
+        }
+        /* Updated text styles */
+        .lung-cancer-system {
+            font-size: 28px; /* Increase font size */
+            font-weight: bold; /* Make bold */
+            margin-bottom: 20px; /* Add margin to separate from the box */
+        }
+        .hospital-name {
+            font-size: 24px; /* Increase font size */
+            font-weight: bold; /* Make bold */
+        }
+        .address {
+            font-size: 18px; /* Decrease font size */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="lung-cancer-system">LUNG CANCER PREDICTION SYSTEM</h2>
+    <div class="form-box">
+        <!-- Hospital name, address, and contact -->
+        <div class="hospital-name">City Hospital</div>
+        <div class="address">
+            <p>Contact Number: +1 123-456-7890</p>
+            <p>City: Metropolis</p>
+        </div>
+        <!-- Form fields -->
+        <form class="form-signup" action="/signup" method="POST">
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Signup</button>
+            <!-- Placeholder for error message -->
+            <div id="error-message">
+                {% if message %}
+                    <p>{{ message }}</p>
+                {% endif %}
+            </div>
+            <!-- Link to login page -->
+            <p class="text-center">Already have an account? <a href="/">Log in here</a>.</p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

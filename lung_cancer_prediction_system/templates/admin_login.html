@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;  /* Full height for vertical centering */
+            background-color: #f5f5f5;  /* Light background */
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+            width: 300px;  /* Fixed width */
+            text-align: center;
+        }
+
+        .input-field {
+            margin-bottom: 20px;  /* Space between input fields */
+        }
+
+        .login-button {
+            background-color: #2196f3;  /* Material Blue 500 */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #1976d2;  /* Material Blue 700 */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h4>Admin Login</h4>
+        <form action="/admin/login" method="POST">  <!-- Ensure this matches the Flask route -->
+            <div class="input-field">
+                <input type="text" id="admin_id" name="admin_id" required>
+                <label for="admin_id">Admin ID</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <button class="login-button" type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Materialize JavaScript (for labels and animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Initialize Materialize components
+        document.addEventListener('DOMContentLoaded', function() {
+            M.updateTextFields();  // Ensure labels behave correctly
+        });
+    </script>
+</body>
+</html>

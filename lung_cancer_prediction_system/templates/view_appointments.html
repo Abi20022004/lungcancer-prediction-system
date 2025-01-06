@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4682B4;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .print-btn, .delete-btn {
+            display: inline-block;
+            margin: 20px 10px;
+            padding: 10px;
+            background-color: #4682B4;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .print-btn:hover {
+            background-color: #87CEFA;
+        }
+
+        .delete-btn {
+            background-color: #ff6347;
+        }
+
+        .delete-btn:hover {
+            background-color: #e55b42;
+        }
+    </style>
+</head>
+<body>
+    <h1>Appointments</h1>
+    <table id="appointmentsTable">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>ID</th>
+                <th>Doctor ID</th>
+                <th>Patient Name</th>
+                <th>Appointment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr id="appointment-{{ appointment.id }}">
+                <td><input type="checkbox" name="selectAppointment" value="{{ appointment.id }}"></td>
+                <td>{{ appointment.id }}</td>
+                <td>{{ appointment.doctor_id }}</td>
+                <td>{{ appointment.patient_name }}</td>
+                <td>{{ appointment.appointment_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center;">
+        <button class="print-btn" onclick="printSelectedAppointments()">Print Selected</button>
+        <button class="delete-btn" onclick="deleteSelectedAppointments()">Delete Selected</button>
+    </div>
+
+    <script>
+        function getSelectedAppointments() {
+            const checkboxes = document.querySelectorAll('input[name="selectAppointment"]:checked');
+            const selectedIds = [];
+            checkboxes.forEach(checkbox => {
+                selectedIds.push(checkbox.value);
+            });
+            return selectedIds;
+        }
+
+        function printSelectedAppointments() {
+            const selectedIds = getSelectedAppointments();
+            if (selectedIds.length === 0) {
+                alert("No appointments selected for printing.");
+                return;
+            }
+
+            selectedIds.forEach(id => {
+                const row = document.getElementById(`appointment-${id}`);
+                if (row) {
+                    var newWin = window.open('', 'Print-Window');
+                    newWin.document.open();
+                    newWin.document.write('<html><head><title>Appointment</title></head><body>');
+                    newWin.document.write('<h1>Appointment Details</h1>');
+                    newWin.document.write(row.outerHTML);
+                    newWin.document.write('</body></html>');
+                    newWin.document.close();
+                    newWin.print();
+                }
+            });
+        }
+
+        function deleteSelectedAppointments() {
+            const selectedIds = getSelectedAppointments();
+            if (selectedIds.length === 0) {
+                alert("No appointments selected for deletion.");
+                return;
+            }
+
+            if (confirm("Are you sure you want to delete the selected appointment(s)?")) {
+                selectedIds.forEach(id => {
+                    fetch(`/appointments/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            const row = document.getElementById(`appointment-${id}`);
+                            if (row) {
+                                row.remove();
+                            }
+                        } else {
+                            console.error(`Failed to delete appointment ${id}. Status: ${response.status}: ${response.statusText}`);
+                            response.json().then(data => {
+                                alert(`Failed to delete appointment ${id}: ${data.error}`);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error while deleting appointment:", error);
+                        alert("An error occurred. Please try again.");
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

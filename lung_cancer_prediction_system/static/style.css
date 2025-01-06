@@ -1,0 +1,70 @@
+/* Add this CSS to style your form with a light theme */
+body {
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+nav {
+  background-color: #ffffff; /* White navbar background */
+}
+
+.nav-wrapper a {
+  color: #333; /* Dark text color for navbar links */
+}
+
+.nav-wrapper a:hover {
+  color: #000; /* Darker text color on hover */
+}
+
+.section {
+  background-color: #ffffff; /* White background for sections */
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px; /* Adjust as needed */
+}
+
+input[type="text"],
+select {
+  border: 1px solid #ccc; /* Gray border for input fields */
+}
+
+.input-field label {
+  color: #333; /* Dark text color for input labels */
+}
+
+.input-field input[type="text"]:focus + label,
+.input-field select:focus + label {
+  color: #039be5; /* Light blue color for focused input labels */
+}
+
+.btn-large {
+  background-color: #039be5; /* Light blue button background */
+  color: #ffffff; /* White button text color */
+}
+
+.btn-large:hover {
+  background-color: #0288d1; /* Darker blue background on hover */
+}
+
+.collapsible-header {
+  background-color: #039be5; /* Light blue color for collapsible header */
+  color: #ffffff; /* White text color for collapsible header */
+}
+
+.collapsible-body {
+  background-color: #ffffff; /* White background for collapsible body */
+  color: #333; /* Dark text color for collapsible body */
+}
+
+footer.page-footer {
+  background-color: #039be5; /* Light blue footer background */
+}
+
+footer.page-footer h5 {
+  color: #ffffff; /* White text color for footer headings */
+}
+
+footer.page-footer p {
+  color: #f0f0f0; /* Light gray text color for footer text */
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #555;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4682B4;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #87CEFA;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Appointment</h1>
+    <form method="POST" action="/book_appointment">
+        <div>
+            <label for="doctor">Select Doctor:</label>
+            <select name="doctor" id="doctor">
+                {% for doctor in doctors %}
+                <option value="{{ doctor[0] }}">{{ doctor[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="appointment_date">Appointment Date:</label>
+            <input type="date" name="appointment_date" id="appointment_date" required>
+        </div>
+        <div>
+            <label for="patient_name">Patient Name:</label>
+            <input type="text" name="patient_name" id="patient_name" required>
+        </div>
+        <button type="submit">Book Appointment</button>
+    </form>
+</body>
+</html>
